@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>96 Coffee - E-commerce</title>
+    <style>
+        body
+        {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #faf9f9;
+            margin: 0;
+            padding: 0;
+            font-size: 25px;
+        }
+        header
+        {
+            background-color: rgb(86, 37, 2);
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+        header img
+        {
+            width: 250px;
+            height: auto;
+            display: block;
+            margin: 0 auto 10px;
+        }
+        .container
+        {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .menu
+        {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .menu h2
+        {
+            width: 100%;
+            background-color: #0a0000;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .menu-item
+        {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(12, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width: 23%;
+            text-align: center;
+            cursor: pointer;
+        }
+        .menu-item img
+        {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .team, .reviews, .social-media
+        {
+            background: #f0f0f0;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .team h2, .reviews h2, .social-media h2
+        {
+            background-color: #080000;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .team img, .reviews img
+        {
+            width: 100px;
+            border-radius: 50%;
+        }
+        .team div, .reviews div
+         {
+            margin: 10px;
+            text-align: center;
+        }
+        .social-media h2
+        {
+            text-align: center;
+        }
+        .social-media a
+        {
+            display: block;
+            margin: 10px 0;
+            color: #0a0000;
+            text-decoration: none;
+        }
+        .popup
+        {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        .popup h3
+        {
+            margin-top: 0;
+        }
+        .popup .close
+        {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #0f0101;
+        }
+        .overlay
+        {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(14, 0, 0, 0.5);
+            z-index: 5;
+        }
+        .cart-button
+        {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #0a0000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <img src="logo.png" alt="96 Coffee Logo">
+    <h1>96 COFFEE</h1>
+    <p>WHERE EVERY SIP TELLS A STORY</p>
+</header>
+<div class="container">
+    <section class="menu">
+        <h2>Our Coffee Menu</h2>
+        <div class="menu-item" onclick="showPopup('Order Summary of Latte Coffee', 'A delicious coffee made with espresso and steamed milk.', '₹Transaction: 410.00 + ₹6GST')">
+            <img src="latte_coffee.img" alt="Latte Coffee">
+            <h3>Latte Coffee</h3>
+            <p>Price: ₹416.00</p>
+            <button class="bag-button" onclick="buynow('Latte Coffee', 416)">Buy now</button>
+        </div>
+        <div class="menu-item" onclick="showPopup('Order Summary of Instant Coffee', 'Quick and easy coffee to start your day.', 'Transaction: ₹240.00 + ₹9GST')">
+          <img src="instant.jpg" alt="Instant Coffee">
+          <h3>Instant Coffee</h3>
+          <p>Price: ₹249.00</p>
+          <button class="bag-button" onclick="buynow('Instant Coffee', 249)">Buy now</button>
+      </div>
+      <div class="menu-item" onclick="showPopup('Order Summary of Cappuccino', 'A perfect blend of espresso, steamed milk, and foam.', 'Transaction: ₹370.50 + ₹4GST')">
+        <img src="cappuccino.jpg" alt="Cappuccino">
+        <h3>Cappuccino</h3>
+        <p>Price: ₹374.50</p>
+        <button class="bag-button" onclick="buynow('cappuccino', 374.50)">Buy now</button>
+    </div>
+    <div class="menu-item" onclick="showPopup('Order Summary of Americano', 'Espresso with added hot water.', 'Transaction: ₹320.00 + ₹13GST')">
+      <img src="americano.jpg" alt="Americano">
+      <h3>Americano</h3>
+      <p>Price: ₹333.00</p>
+      <button class="bag-button" onclick="buynow('americano',333 )">Buy now</button>
+  </div>
+  <div class="menu-item" onclick="showPopup('Order Summary of Caffè Macchiato', 'Espresso marked with a dollop of foamed milk.', 'Transaction: ₹390.75 + ₹5GST')">
+      <img src="Caffè Macchiato.jpg" alt="Caffè Macchiato">
+      <h3>Caffè Macchiato</h3>
+      <p>Price: ₹395.75</p>
+      <button class="bag-button" onclick="buynow('Caffè Macchiato', 395.75)">Buy now</button>
+  </div>
+  <div class="menu-item" onclick="showPopup('Order Summary of Espresso', 'Rich and bold, served as a single shot.', 'Transaction: ₹280.50 + ₹11GST')">
+    <img src="Espresso.jpg" alt="Espresso">
+    <h3>Espresso</h3>
+    <p>Price: ₹291.50</p>
+    <button class="bag-button" onclick="buynow('Espresso', 291.50)">Buy now</button>
+</div>
+<div class="menu-item" onclick="showPopup('Order Summary of Iced Coffee', 'Refreshing cold coffee.', 'Transaction: ₹320.25 + ₹7GST')">
+    <img src="Iced cofffee.jpg" alt="Iced Coffee">
+    <h3>Iced Coffee</h3>
+    <p>Price: ₹327.25</p>
+    <button class="bag-button" onclick="buynow('Iced coffee', 327.25)">Buy now</button>
+</div>
+<div class="menu-item" onclick="showPopup('Order Summary of Black Coffee', 'Pure coffee with no added ingredients.', 'Transaction: ₹160.50 + ₹5GST')">
+    <img src="black.jpg" alt="Black Coffee">
+    <h3>Black Coffee</h3>
+    <p>Price: ₹165.50</p>
+    <button class="bag-button" onclick="buynow('Black coffee', 165.50)">Buy now</button>
+</div>
+<div class="menu-item" onclick="showPopup('Order Summary of Turkish Coffee', 'Strong and flavorful coffee with grounds.', 'Transaction: ₹410.50 + ₹10GST')">
+  <img src="turkish.jpg" alt="Turkish Coffee">
+  <h3>Turkish Coffee</h3>
+  <p>Price: ₹420.50</p>
+  <button class="bag-button" onclick="buynow('Turkish coffee', 420.50)">Buy now</button>
+</div>
+
+    </section>
+    <section class="team">
+      <h2>Our Team</h2>
+      <div>
+          <img src="rikki.jpg" alt="Sai Rithwik Patel">
+          <h3>T. Sai Rithwik Patel (CEO & FOUNDER)</h3>
+          <p>T. Sai Rithwik a ECE student from CMR Technical Campus.Tech explorer, Gamer and Video editor .</p>
+      </div>
+      <div>
+          <img src="jhonny_sins.jpg" alt="Jhonny Sins">
+          <h3>Steven Wolfe (CMO)</h3>
+          <p>Steven Wolfe (born December 31, 1978), better known as Johnny Sins, is an American Actor, director, doctor, astronaut, police, YouTuber and What not. He is consistently among the most popular male multi talent personality and is known for his shaved head, muscular physique, and blue eyes.</p>
+      </div>
+      <div>
+          <img src="samantha.jpg" alt="Samantha">
+          <h3>Samantha (Brand Ambassador)</h3>
+          <p>Samantha Ruth Prabhu (formerly Akkineni; born 28 April 1987) is an Indian actress who works primarily in Telugu and Tamil films. She is the recipient of several accolades, including four Filmfare Awards South.Samantha made her acting debut in the Telugu romance film Ye Maaya Chesave (2010), winning the Filmfare Award for Best Female Debut South. She became the second actress to win both the Filmfare Award for Best Actress Tamil and Best Actress Telugu in the same year, for her performances in the 2012 films Neethaane En Ponvasantham and Eega, respectively.</p>
+      </div>
+
+    </section>
+    <section class="reviews">
+      <h2>Customer Reviews</h2>
+      <div>
+          <img src="carry.jpg" alt="Carry Minati">
+          <h3>Carry Minati</h3>
+          <p>"Best coffee ever I drank in my life"</p>
+      </div>
+      <div>
+          <img src="rash.jpg" alt="Rashmika Mandanna">
+          <h3>Rashmika Mandanna</h3>
+          <p>"I love the ambiance and the coffee is OMG Extremely good!"</p>
+      </div>
+      <div>
+          <img src="allu_arjun.jpeg" alt="Allu Arjun">
+          <h3>Allu Arjun</h3>
+          <p>"Amazing flavors, the taste of the coffee is just awesome and great service!"</p>
+
+    </section>
+    <section class="social-media">
+      <h2>FOLLOW US ON </h2>
+      <a href="https://x.com/Rikki_5171?t=x5X7NOJuONgXr9Qj0q_Cmg&s=09" target="_blank">Twitter X</a>
+      <a href="https://www.linkedin.com/in/thogaru-sai-rithwik-patel-7065a9281?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
+      <a href="https://www.instagram.com/rikki_5171?igsh=Nms2N2E3YzEwdnBl" target="_blank">Instagram</a>
+
+    </section>
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+    <div class="popup" id="popup">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h3 id="popup-title"></h3>
+        <p id="popup-description"></p>
+        <p id="popup-price"></p>
+    </div>
+    <button class="cart-button" onclick="viewpurchases()">View Purchases</button>
+    <script>
+        function showPopup(title, description, price)
+        {
+            document.getElementById('popup-title').textContent = title;
+            document.getElementById('popup-description').textContent = description;
+            document.getElementById('popup-price').textContent = price;
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closePopup()
+        {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        let cart = [];
+
+        function buynow(itemName, price)
+        {
+            cart.push({ name: itemName, price: price });
+            alert(itemName + " purchased!");
+        }
+
+        function viewpurchases()
+        {
+            let cartContent = "nothing ordered 💩.";
+            if (cart.length > 0)
+            {
+                cartContent = "Items you bought:\n";
+                cart.forEach(item =>
+                {
+                    cartContent += `${item.name}: ₹${item.price}\n`;
+                });
+            }
+            alert(cartContent);
+        }
+    </script>
+</div>
+</body>
+</html>
